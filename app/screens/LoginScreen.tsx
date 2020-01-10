@@ -1,42 +1,45 @@
-import React, { Component } from 'react';
-import { StyleSheet, Text, Image, View, Dimensions } from 'react-native';
+import React from 'react';
+import { StyleSheet, ImageBackground, View, } from 'react-native';
 import {BigLogo} from "../components/Logo";
-import {LoginForm} from '../components/Forms';
-import {Colors, Spacing, Typography} from '../styles';
-import { SignInButtons } from '../components/SignInButtons';
+import {Colors, Spacing} from '../styles';
 
-const {width, height} = Dimensions.get("window");
 
-class LoginScreen extends Component {
+const LoginScreen: React.FC = () => (
+    <View>
+      <ImageBackground source={require("./../../assets/bBall.png")} style={styles.imgBackground} resizeMode="cover" >
+        <BigLogo/>
+        <View style={styles.formContainer}>
 
-  render(){
-    return(
-      <View style={styles.container}>
-        <View style={{...StyleSheet.absoluteFill }}>
-          <Image 
-          source={require("./../../assets/bBall.png")}
-          style={styles.imgBackground}
-        />
         </View>
-        <SignInButtons />
-      </View>
-
-    )
-  }
-}
-
+      </ImageBackground>
+    </View>
+)
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "white",
-    justifyContent:"flex-end",
-  },
   imgBackground: {
-    width: null,
-    height: null,
-    flex: 1,
+    width: '100%',
+    height: '100%',
+  },
+  button: {
+    justifyContent: "center",
+    backgroundColor: "transparent",
+    marginTop: 50,
+    borderWidth: 1,
+    borderColor: Colors.colors.secondary,
+  },
+  text: {
+    color: Colors.colors.secondary,
+  },
+  formContainer: {
+    backgroundColor: Colors.colors.primary,
+    width: 360,
+    height: 350,
+    opacity: 0.5,
+    marginTop: Spacing.margin.md,
+    borderRadius: 20,
+
   }
+
 });
 
 export default LoginScreen;

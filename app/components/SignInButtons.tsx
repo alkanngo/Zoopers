@@ -1,7 +1,5 @@
 import React from 'react';
 import { StyleSheet, Text, View, Dimensions } from 'react-native';
-import {BigLogo} from "../components/Logo";
-import {LoginForm} from '../components/Forms';
 import {Colors, Spacing, Typography} from '../styles';
 
 const {width, height} = Dimensions.get("window");
