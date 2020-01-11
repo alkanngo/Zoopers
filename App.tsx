@@ -4,6 +4,13 @@ import LoginScreen from './app/screens/LoginScreen';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
+interface IAppProps{
+}
+
+interface IAppState {
+  isReady:boolean;
+}
+
 
 function cacheImages(images) {
   return images.map(image => {
@@ -15,9 +22,11 @@ function cacheImages(images) {
   });
 }
 
-export default class App extends React.Component{
-  constructor(){
-    super()
+export default class App extends React.Component <IAppProps ,IAppState>{
+  state: IAppState;
+
+  constructor(props){
+    super(props)
     
     this.state={
       isReady:false
