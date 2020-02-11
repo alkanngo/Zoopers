@@ -11,7 +11,7 @@ const HomeScreen: React.FC = () => (
 
 const styles = StyleSheet.create({
     container: {
-        color: Colors.colors.secondary,
+        color: Colors.name.secondary,
     },
 
 });

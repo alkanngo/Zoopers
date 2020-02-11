@@ -3,6 +3,8 @@ import { AppLoading } from "expo"
 import LoginScreen from './app/screens/LoginScreen';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { UserProvider } from "./app/context/UserContext"
+import { ProvideAuth } from "./app/hooks/useAuth";
 
 interface IAppProps{
 }
@@ -56,9 +58,11 @@ export default class App extends React.Component <IAppProps ,IAppState>{
       );
     }
     return(
-      <LoginScreen>
-        
-      </LoginScreen>
+      <UserProvider>
+        <LoginScreen>
+          
+        </LoginScreen>
+      </UserProvider>
     )
   }
 }
