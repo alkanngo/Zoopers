@@ -10,7 +10,7 @@ export const SignInButtons:React.FC = () => {
             <View style={styles.button}>
                 <Text style={styles.buttonText}>SIGN IN</Text>
             </View>
-            <View style={{...styles.button, backgroundColor: Colors.colors.secondary}}>
+            <View style={{...styles.button, backgroundColor: Colors.name.secondary}}>
                 <Text style={styles.buttonText}>SIGN IN WITH GOOGLE</Text>
             </View>
         </View>
