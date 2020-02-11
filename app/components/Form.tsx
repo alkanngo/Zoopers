@@ -33,7 +33,25 @@ const LoginForm:React.FC = (props) => {
   }
 
   const loginUser = (email, password) => {
-    
+    try {
+      if(password.length < 6) {
+        alert("Password needs to ba atleast 6 characters")
+        return;
+      }
+
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(email,password)
+        .then((user) => {
+          console.log(user)
+        })
+    } catch (error) {
+      console.log(error.toString())
+    }
+  }
+
+  const handleLogin = (email, password) => {
+    loginUser(email, password);
   }
 
 
@@ -62,7 +80,7 @@ const LoginForm:React.FC = (props) => {
         <Button
           full
           style={styles.login}
-          onPress={() => loginUser(email, password)}
+          onPress={() => handleLogin(email, password)}
         >
           <Text style={{fontSize: Typography.size.md, color: Colors.name.secondary}}>Login</Text>
         </Button>
