@@ -8,10 +8,11 @@ export const UserProvider = (props) => {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [isLoggedIn, setIsLoggedIn] = useState(false)
 
 
     return (
-        <UserContext.Provider value={[email, setEmail], [password, setPassword]}>
+        <UserContext.Provider value={[isLoggedIn, setIsLoggedIn]}>
             {props.children}
         </UserContext.Provider>
     );
