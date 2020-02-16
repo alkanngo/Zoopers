@@ -5,9 +5,20 @@ import {BigLogo} from "../components/Logo";
 import {Colors, Spacing, Typography} from '../styles';
 import LoginForm from '../components/Form';
 import { UserContext } from "./../context/UserContext"
+import firebase from "firebase";
 
-function LoginScreen() {
+function LoginScreen(props) {
 
+  const [isLoggedIn, setIsLoggedIn] = useContext(UserContext);
+
+  firebase.auth().onAuthStateChanged(user => {
+    if(user && !isLoggedIn) {
+      props.navigation.navigate("Loading")
+    } 
+    else if(user && isLoggedIn) {
+      props.navigation.navigate("Home")
+    }
+  })
 
   return(
     <Container>
