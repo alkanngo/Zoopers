@@ -6,24 +6,24 @@ import LoginScreen from "../screens/LoginScreen";
 import LoadingScreen from "../screens/LoadingScreen";
 
 const screens = {
-    Loading: {
-        screen: LoadingScreen,
-        navigationOptions: {
-            headerShown: false
-        }
-    },
-    Home: {
-        screen: HomeScreen
-    },
-    Login: {
-        screen: LoginScreen,
-        navigationOptions: {
-            headerShown: false
-        }
-    },
-    Map: {
-        screen: MapScreen
-    }, 
+  Loading: {
+    screen: LoadingScreen,
+    navigationOptions: {
+      headerShown: false
+    }
+  },
+  Home: {
+    screen: HomeScreen
+  },
+  Login: {
+    screen: LoginScreen,
+    navigationOptions: {
+      headerShown: false
+    }
+  },
+  Map: {
+    screen: MapScreen
+  }, 
 }
 
 const HomeStack = createStackNavigator(screens);
