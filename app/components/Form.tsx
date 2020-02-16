@@ -10,7 +10,7 @@ import {initFirebase} from "./../config/firebaseConfig";
 
 
 
-function LoginForm(navigation) {
+function LoginForm(props) {
   // const auth = useAuth();
 
   // console.log(auth)
@@ -22,7 +22,6 @@ function LoginForm(navigation) {
 
   const signupUser = (email, password) => {
     try {
-
       if(password.length < 6) {
         alert("Password needs to ba atleast 6 characters")
         return;
@@ -31,6 +30,7 @@ function LoginForm(navigation) {
       firebase
         .auth()
         .createUserWithEmailAndPassword(email,password)
+        alert("Ur now a member!!!!!! HOOORAY")
     } catch (error) {
       console.log(error.toString())
     }
@@ -52,7 +52,6 @@ function LoginForm(navigation) {
   const handleLogin = (email, password) => {
     loginUser(email, password);
     setIsLoggedIn(true);
-    
   }
 
 
