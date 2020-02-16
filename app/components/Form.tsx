@@ -1,15 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Text, StyleSheet, View, Dimensions } from 'react-native';
 import { Content, Header, Form, Input, Item, Button, Label } from 'native-base';
 import { useAuth } from "./../hooks/useAuth"
 import { Colors, Spacing, Typography } from "./../styles"
+import { UserContext } from "./../context/UserContext"
 
 import * as firebase from "firebase";
 import {initFirebase} from "./../config/firebaseConfig";
 
 
 
-const LoginForm:React.FC = (props) => {
+function LoginForm(navigation) {
   // const auth = useAuth();
 
   // console.log(auth)
@@ -17,16 +18,19 @@ const LoginForm:React.FC = (props) => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useContext(UserContext)
 
   const signupUser = (email, password) => {
     try {
+
       if(password.length < 6) {
         alert("Password needs to ba atleast 6 characters")
         return;
       }
 
-      firebase.auth().createUserWithEmailAndPassword(email,password);
-      console.log("Success");
+      firebase
+        .auth()
+        .createUserWithEmailAndPassword(email,password)
     } catch (error) {
       console.log(error.toString())
     }
@@ -34,11 +38,6 @@ const LoginForm:React.FC = (props) => {
 
   const loginUser = (email, password) => {
     try {
-      if(password.length < 6) {
-        alert("Password needs to ba atleast 6 characters")
-        return;
-      }
-
       firebase
         .auth()
         .signInWithEmailAndPassword(email,password)
@@ -52,6 +51,8 @@ const LoginForm:React.FC = (props) => {
 
   const handleLogin = (email, password) => {
     loginUser(email, password);
+    setIsLoggedIn(true);
+    
   }
 
 
