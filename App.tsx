@@ -5,6 +5,7 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { UserProvider } from "./app/context/UserContext"
 import { ProvideAuth } from "./app/hooks/useAuth";
+import Navigator from "./app/routes/homeStack";
 
 interface IAppProps{
 }
@@ -59,9 +60,7 @@ export default class App extends React.Component <IAppProps ,IAppState>{
     }
     return(
       <UserProvider>
-        <LoginScreen>
-          
-        </LoginScreen>
+        <Navigator />
       </UserProvider>
     )
   }
