@@ -7,32 +7,32 @@ import firebase from "firebase";
 
 function HomeScreen (props) {
 
-    const logoutUser = () => {
-        firebase.auth().signOut();
-        props.navigation.navigate("Login");
-    }
+  const logoutUser = () => {
+    firebase.auth().signOut();
+    props.navigation.navigate("Login")
+  }
 
-    const navigateToMaps = () => {
-        props.navigation.navigate("Map")
-    }
+  const navigateToMaps = () => {
+    props.navigation.navigate("Map")
+  }
 
-    return (
-        <View>
-            <Text>HEMMASKÄRM</Text>
-            <Button onPress={navigateToMaps}>
-                <Text>Maps</Text>
-            </Button>
-            <Button danger onPress={logoutUser}>
-                <Text>Logout</Text>
-            </Button>
-        </View>
-    )
+  return (
+    <View>
+      <Text>HEMMASKÄRM</Text>
+      <Button onPress={navigateToMaps}>
+        <Text>Maps</Text>
+      </Button>
+      <Button danger onPress={logoutUser}>
+        <Text>Logout</Text>
+      </Button>
+    </View>
+  )
 }
 
 const styles = StyleSheet.create({
-    container: {
-        color: Colors.name.secondary,
-    },
+  container: {
+    color: Colors.name.secondary,
+  },
 
 });
 

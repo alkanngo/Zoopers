@@ -4,15 +4,15 @@ import {Colors} from '../styles';
 
 
 const HomeScreen: React.FC = () => (
-    <View>
-        <Text>MAPS</Text>
-    </View>
+  <View>
+    <Text>MAPS</Text>
+  </View>
 )
 
 const styles = StyleSheet.create({
-    container: {
-        color: Colors.name.secondary,
-    },
+  container: {
+    color: Colors.name.secondary,
+  },
 
 });
 
