@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, View, Text, Slider } from "react-native";
-import {Colors} from "../styles";
 import { Button, Container, Content } from "native-base";
+import { Colors, Spacing, Typography } from "./../styles";
 import firebase from "firebase";
 import HoopButton from "./../components/HoopButton";
 
 function HomeScreen (props) {
+
+  const [min, setMin] = useState();
+  const [max, setMax] = useState();
+  const [slideValue, setSlideValue] = useState();
+
 
   const logoutUser = () => {
     firebase.auth().signOut();
@@ -17,38 +22,55 @@ function HomeScreen (props) {
   }
 
   return (
-    <Container style={styles.container}>
-      <Content style={styles.content}>
+      <Content contentContainerStyle={styles.content}>
+        <View style={styles.textGroup}>
+          <Text style={styles.text}>Choose radius in which to find Hoops</Text>
+          <Text style={styles.km} >{Math.floor(slideValue)} Km</Text>
+        </View>
         <View style={styles.slider}>
-          <Slider />
+          <Slider 
+            thumbTintColor={Colors.name.secondary}
+            minimumTrackTintColor={Colors.name.secondary}
+            minimumValue={0}
+            maximumValue={100}
+            value={min}
+            onValueChange={(value) => setSlideValue(value)}
+          />
         </View>
         <HoopButton 
           value="Locate"
           onPress={navigateToMaps}
         />
-        <Button danger onPress={logoutUser}>
-          <Text>Logout</Text>
-        </Button>
+        <View style={{ marginBottom: Spacing.margin.lg}}/>
+        <HoopButton
+          value="Logout"
+          onPress={logoutUser}
+          danger
+        />
       </Content>
-    </Container>
   )
 }
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: Colors.name.primary,
-    height: "100%",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center"
-  },
   content: {
     width: "100%",
-    height: 200,
+    height: "100%",
     alignContent: "center",
+    justifyContent: "center"
+  },
+  textGroup: {
+    bottom: 50,
+    alignItems: "center"
+  },
+  text: {
+    fontSize: Typography.size.lg,
+    textAlign: "center",
+  },
+  km: {
+    marginTop: Spacing.margin.lg
   },
   slider: {
-    backgroundColor: Colors.name.secondary
+    marginBottom: Spacing.margin.lg
   },
   button: {
 
