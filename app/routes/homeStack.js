@@ -6,14 +6,14 @@ import LoginScreen from "../screens/LoginScreen";
 import LoadingScreen from "../screens/LoadingScreen";
 
 const screens = {
+  Home: {
+    screen: HomeScreen
+  },
   Loading: {
     screen: LoadingScreen,
     navigationOptions: {
       headerShown: false
     }
-  },
-  Home: {
-    screen: HomeScreen
   },
   Login: {
     screen: LoginScreen,
