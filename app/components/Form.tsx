@@ -4,6 +4,7 @@ import { Content, Header, Form, Input, Item, Button, Label } from 'native-base';
 import { useAuth } from "./../hooks/useAuth"
 import { Colors, Spacing, Typography } from "./../styles"
 import { UserContext } from "./../context/UserContext"
+import HoopButton from "./HoopButton";
 
 import * as firebase from "firebase";
 import {initFirebase} from "./../config/firebaseConfig";
@@ -67,7 +68,7 @@ function LoginForm(props) {
             onChangeText={(email) => setEmail(email)}
           />
         </Item>
-        <Item floatingLabel style={{borderBottomWidth: 0}}>
+        <Item floatingLabel style={{borderBottomWidth: 0, marginBottom: Spacing.margin.lg}}>
           <Label style={{color: Colors.name.secondary}}>Password</Label>
           <Input 
             autoCorrect={false}
@@ -77,13 +78,10 @@ function LoginForm(props) {
             onChangeText={(password) => setPassword(password)}
           />
         </Item>
-        <Button
-          full
-          style={styles.login}
+        <HoopButton
+          value="Login"
           onPress={() => handleLogin(email, password)}
-        >
-          <Text style={{fontSize: Typography.size.md, color: Colors.name.secondary}}>Login</Text>
-        </Button>
+        />
         <Button
           full
           bordered
@@ -106,14 +104,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     height: 350,
     borderRadius: 10,
-  },
-  login:{
-    alignSelf: "center",
-    backgroundColor: Colors.name.primary,
-    marginTop: Spacing.margin.lg,
-    elevation: 100,
-    borderRadius: 10,
-    width:150,
   },
   signup:{
     alignSelf: "center",
