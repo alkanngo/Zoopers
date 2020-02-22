@@ -5,80 +5,38 @@ import {BigLogo} from "../components/Logo";
 import {Colors, Spacing, Typography} from '../styles';
 import LoginForm from '../components/Form';
 import { UserContext } from "./../context/UserContext"
+import firebase from "firebase";
 
-// import * as firebase from "firebase";
+function LoginScreen(props) {
 
-// const firebaseConfig = {
-//   apiKey: "AIzaSyC7BomPpwhwo9YTy6kzr0MY5IMUOZ1D3kA",
-//   authDomain: "hoopfinderr.firebaseapp.com",
-//   databaseURL: "https://hoopfinderr.firebaseio.com",
-//   projectId: "hoopfinderr",
-//   storageBucket: "hoopfinderr.appspot.com",
-//   messagingSenderId: "851736769620",
-//   appId: "1:851736769620:web:f64d3cf13718f5e61629c1"
-// };
+  const [isLoggedIn, setIsLoggedIn] = useContext(UserContext);
 
-// firebase.initializeApp(firebaseConfig);
+  firebase.auth().onAuthStateChanged(user => {
+    if(user && !isLoggedIn) {
+      props.navigation.navigate("Loading")
+    } 
+    else if(user && isLoggedIn) {
+      props.navigation.navigate("Home")
+    }
+  })
 
-interface ILoginProps {
-
+  return(
+    <Container>
+    <ImageBackground 
+      source={require("./../../assets/bBall.png")} 
+      style={{height: '100%'}} 
+      resizeMode="cover"
+    >
+      <BigLogo/>
+      <LoginForm />
+    </ImageBackground>
+  </Container>
+  )
 }
-
-interface ILoginState {
-  
-}
-
-const signUpUser = (email,password) => {
-
-}
-const loginUser = (email,password) => {
-  
-}
-
-const LoginScreen:React.FC = () => {
-  // constructor(props){
-    //   super(props)
-    
-    //   this.state = {
-      //     email: "",
-      //     password: ""
-      //   };
-      // }
-      
-  const [userEmail, setUserEmail] = useContext(UserContext)
-  console.log(userEmail);
-
-
-  // render(){
-    return(
-      <Container>
-      <ImageBackground 
-        source={require("./../../assets/bBall.png")} 
-        style={{height: '100%'}} 
-        resizeMode="cover"
-      >
-        <BigLogo/>
-        <LoginForm />
-      </ImageBackground>
-    </Container>
-    )
-  }
-//}
 
 const styles = StyleSheet.create({
   text: {
-    color: Colors.name.primary,
-    fontSize: Typography.size.lg
   },
-  button: {
-    borderWidth: 3,
-    width: 100,
-    backgroundColor: "transparent",
-    shadowColor: "blue",
-    alignSelf: "center",
-    borderColor: Colors.name.secondary
-    
-  }
 });
 
 export default LoginScreen;
