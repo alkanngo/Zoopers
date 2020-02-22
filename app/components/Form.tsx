@@ -1,9 +1,9 @@
 import React, { useState, useContext } from 'react';
 import { Text, StyleSheet, View, Dimensions } from 'react-native';
 import { Content, Header, Form, Input, Item, Button, Label } from 'native-base';
-import { useAuth } from "./../hooks/useAuth"
-import { Colors, Spacing, Typography } from "./../styles"
-import { UserContext } from "./../context/UserContext"
+import { useAuth } from "./../hooks/useAuth";
+import { Colors, Spacing, Typography } from "./../styles";
+import { UserContext } from "./../context/UserContext";
 import HoopButton from "./HoopButton";
 
 import * as firebase from "firebase";
