@@ -6,7 +6,9 @@ export const UserContext = React.createContext();
  // Provides the data, wrap whatever element you want to use this state in
 export const UserProvider = (props) => {
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [slideValue, setSlideValue] = useState();
+
 
   return (
     <UserContext.Provider value={[isLoggedIn, setIsLoggedIn]}>
