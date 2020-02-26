@@ -7,6 +7,7 @@ import { Colors, Spacing, Typography } from "../styles"
 interface IButtonProps {
   onPress(): void,
   value: string,
+  danger?: boolean,
 }
 
 const HoopButton:React.FC<IButtonProps> = (props) => {
@@ -14,10 +15,10 @@ const HoopButton:React.FC<IButtonProps> = (props) => {
     <View>
       <Button
         full
-        style={styles.button}
+        style={props.danger ? styles.danger : styles.button}
         onPress={props.onPress}
       >
-          <Text style={{fontSize: Typography.size.md, color: Colors.name.secondary}}>
+          <Text style={props.danger ? styles.dangerText : styles.text}>
             {props.value}
           </Text>
       </Button>
@@ -32,6 +33,20 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     width:150,
   },
+  danger: {
+    alignSelf: "center",
+    backgroundColor: Colors.name.secondary,
+    borderRadius: 10,
+    width:150,
+  },
+  text: {
+    fontSize: Typography.size.md,
+    color: Colors.name.secondary
+  },
+  dangerText: {
+    fontSize: Typography.size.md,
+    color: Colors.name.primary
+  }
 });
 
 export default HoopButton;
