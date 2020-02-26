@@ -1,16 +1,13 @@
 import React, { useState } from "react";
 import { StyleSheet, View, Text, Slider } from "react-native";
-import { Button, Container, Content } from "native-base";
+import { Content } from "native-base";
 import { Colors, Spacing, Typography } from "./../styles";
 import firebase from "firebase";
 import HoopButton from "./../components/HoopButton";
 
 function HomeScreen (props) {
 
-  const [min, setMin] = useState();
-  const [max, setMax] = useState();
   const [slideValue, setSlideValue] = useState();
-
 
   const logoutUser = () => {
     firebase.auth().signOut();
@@ -33,7 +30,7 @@ function HomeScreen (props) {
             minimumTrackTintColor={Colors.name.secondary}
             minimumValue={0}
             maximumValue={100}
-            value={min}
+            value={40}
             onValueChange={(value) => setSlideValue(value)}
           />
         </View>
@@ -72,10 +69,6 @@ const styles = StyleSheet.create({
   slider: {
     marginBottom: Spacing.margin.lg
   },
-  button: {
-
-  }
-
 });
 
 export default HomeScreen;
