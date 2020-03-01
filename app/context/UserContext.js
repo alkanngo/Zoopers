@@ -7,11 +7,18 @@ export const UserContext = React.createContext();
 export const UserProvider = (props) => {
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [slideValue, setSlideValue] = useState();
+  const [isSignedIn, setIsSignedIn] = useState(false);
+  const [name, setName] = useState("");
+  const [photoUrl , setPhotoUrl] = useState(false);
 
 
   return (
-    <UserContext.Provider value={[isLoggedIn, setIsLoggedIn]}>
+    <UserContext.Provider value={
+        [isLoggedIn, setIsLoggedIn],
+        [isSignedIn, setIsSignedIn],
+        [name, setName],
+        [photoUrl , setPhotoUrl]
+      }>
       {props.children}
     </UserContext.Provider>
   );
