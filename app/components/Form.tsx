@@ -7,6 +7,7 @@ import { UserContext } from "./../context/UserContext";
 import HoopButton from "./HoopButton";
 import * as Google from 'expo-google-app-auth';
 
+
 import * as firebase from "firebase";
 import {initFirebase} from "./../config/firebaseConfig";
 
@@ -24,6 +25,7 @@ function LoginForm(props) {
   const [isSignedIn, setIsSignedIn] = useContext(UserContext);
   const [name, setName] = useContext(UserContext);
   const [photoUrl , setPhotoUrl] = useContext(UserContext);
+
 
   const signupUser = (email, password) => {
     try {
@@ -140,6 +142,7 @@ function LoginForm(props) {
 
   const loginUser = (email, password) => {
     try {
+
       firebase
         .auth()
         .signInWithEmailAndPassword(email,password)
@@ -183,10 +186,12 @@ function LoginForm(props) {
           value="Login"
           onPress={() => handleLogin(email, password)}
         />
+
         <HoopButton
           value="GoogleLogin"
           onPress={() => signInWithGoogleAsync()}
         />
+
         <Button
           full
           bordered
