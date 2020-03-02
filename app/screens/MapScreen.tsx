@@ -1,19 +1,28 @@
 import React from 'react';
 import { StyleSheet, ImageBackground, View, Text } from 'react-native';
-import {Colors} from '../styles';
+import { Content } from "native-base";
 
+import { Colors } from '../styles';
+import MapView from "react-native-maps";
 
-const HomeScreen: React.FC = () => (
-  <View>
-    <Text>MAPS</Text>
-  </View>
+const MapScreen: React.FC = () => (
+
+  <Content contentContainerStyle={styles.container}>
+    <MapView style={styles.mapStyle}/>
+  </Content>
 )
 
 const styles = StyleSheet.create({
   container: {
-    color: Colors.name.secondary,
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-
+  mapStyle: {
+    width: "100%",
+    height: "100%"
+  }
 });
 
-export default HomeScreen;
+export default MapScreen;
