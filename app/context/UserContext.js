@@ -10,6 +10,7 @@ export const UserProvider = (props) => {
   const [isSignedIn, setIsSignedIn] = useState(false);
   const [name, setName] = useState("");
   const [photoUrl , setPhotoUrl] = useState(false);
+  const [sliderRadius, setSliderRadius] = useState(250);
 
 
   return (
@@ -17,7 +18,8 @@ export const UserProvider = (props) => {
         [isLoggedIn, setIsLoggedIn],
         [isSignedIn, setIsSignedIn],
         [name, setName],
-        [photoUrl , setPhotoUrl]
+        [photoUrl , setPhotoUrl],
+        [sliderRadius, setSliderRadius]
       }>
       {props.children}
     </UserContext.Provider>
