@@ -1,14 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
+
 import { StyleSheet, View, Text, Slider } from "react-native";
 import { Content } from "native-base";
 import { Colors, Spacing, Typography } from "./../styles";
-import firebase from "firebase";
+import { UserContext } from "./../context/UserContext"
+
 import HoopButton from "./../components/HoopButton";
+import HoopSlider from "./../components/HoopSlider";
+
+
+import firebase from "firebase";
 
 function HomeScreen (props) {
 
-  const [slideValue, setSlideValue] = useState();
-
+  useEffect(() => {
+  },);
   const logoutUser = () => {
     firebase.auth().signOut();
     props.navigation.navigate("Login")
@@ -20,20 +26,7 @@ function HomeScreen (props) {
 
   return (
       <Content contentContainerStyle={styles.content}>
-        <View style={styles.textGroup}>
-          <Text style={styles.text}>Choose radius in which to find Hoops</Text>
-          <Text style={styles.km} >{Math.floor(slideValue)} Km</Text>
-        </View>
-        <View style={styles.slider}>
-          <Slider 
-            thumbTintColor={Colors.name.secondary}
-            minimumTrackTintColor={Colors.name.secondary}
-            minimumValue={0}
-            maximumValue={100}
-            value={40}
-            onValueChange={(value) => setSlideValue(value)}
-          />
-        </View>
+        <HoopSlider />
         <HoopButton 
           value="Locate"
           onPress={navigateToMaps}
@@ -54,21 +47,7 @@ const styles = StyleSheet.create({
     height: "100%",
     alignContent: "center",
     justifyContent: "center"
-  },
-  textGroup: {
-    bottom: 50,
-    alignItems: "center"
-  },
-  text: {
-    fontSize: Typography.size.lg,
-    textAlign: "center",
-  },
-  km: {
-    marginTop: Spacing.margin.lg
-  },
-  slider: {
-    marginBottom: Spacing.margin.lg
-  },
+  }
 });
 
 export default HomeScreen;
