@@ -1,15 +1,15 @@
 import React, { useState, useContext } from 'react';
 import { Text, StyleSheet, View, Dimensions } from 'react-native';
 import { Content, Header, Form, Input, Item, Button, Label } from 'native-base';
-import { useAuth } from "./../hooks/useAuth";
-import { Colors, Spacing, Typography } from "./../styles";
-import { UserContext } from "./../context/UserContext";
+import { useAuth } from "../hooks/useAuth";
+import { Colors, Spacing, Typography } from "../styles";
+import { UserContext } from "../context/UserContext";
 import HoopButton from "./HoopButton";
 import * as Google from 'expo-google-app-auth';
 
 
 import * as firebase from "firebase";
-import {initFirebase} from "./../config/firebaseConfig";
+import {initFirebase} from "../config/firebaseConfig";
 
 
 
@@ -186,7 +186,7 @@ function LoginForm(props) {
           value="Login"
           onPress={() => handleLogin(email, password)}
         />
-
+        <View style={{margin: Spacing.margin.sm}} />
         <HoopButton
           value="GoogleLogin"
           onPress={() => signInWithGoogleAsync()}
@@ -212,7 +212,7 @@ const styles = StyleSheet.create({
   form:{
     justifyContent: "center",
     alignItems: "center",
-    height: 350,
+    height: 360,
     borderRadius: 10,
   },
   signup:{
