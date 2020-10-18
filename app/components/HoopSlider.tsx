@@ -17,8 +17,9 @@ const HoopSlider:React.FC = () => {
         <Slider 
           thumbTintColor={Colors.name.secondary}
           minimumTrackTintColor={Colors.name.secondary}
+          maximumTrackTintColor="#FFF"
           minimumValue={0}
-          maximumValue={1000}
+          maximumValue={10000}
           value={sliderRadius}
           onValueChange={(value) => setSliderRadius(value)}
         />
@@ -36,9 +37,11 @@ const styles = StyleSheet.create({
   text: {
     fontSize: Typography.size.lg,
     textAlign: "center",
+    color: "#FFF"
   },
   km: {
-    marginTop: Spacing.margin.lg
+    marginTop: Spacing.margin.lg,
+    color: "#FFF"
   },
   slider: {
     marginBottom: Spacing.margin.lg

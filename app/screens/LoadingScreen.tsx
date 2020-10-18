@@ -28,6 +28,7 @@ function LoadingScreen(props) {
         resizeMode="cover"
       >
         <Spinner color="black"/>
+        {props.children}
       </ImageBackground>
     </Container>
   )

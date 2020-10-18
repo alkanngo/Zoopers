@@ -10,7 +10,7 @@ export const UserProvider = (props) => {
   const [isSignedIn, setIsSignedIn] = useState(false);
   const [name, setName] = useState("");
   const [photoUrl , setPhotoUrl] = useState(false);
-  const [sliderRadius, setSliderRadius] = useState(250);
+  const [sliderRadius, setSliderRadius] = useState(1500);
 
 
   return (

@@ -3,7 +3,7 @@ import { StyleSheet, ImageBackground, Text } from 'react-native';
 import {Button, Container} from "native-base";
 import {BigLogo} from "../components/Logo";
 import {Colors, Spacing, Typography} from '../styles';
-import LoginForm from '../components/Form';
+import LoginForm from '../components/HoopForm';
 import { UserContext } from "./../context/UserContext"
 import firebase from "firebase";
 

@@ -19,6 +19,7 @@ const screens = {
       headerStyle: {
         height: 120,
         backgroundColor: Colors.name.primary,
+        elevation: 0
       },
       headerTitleAlign: "center"
     }
