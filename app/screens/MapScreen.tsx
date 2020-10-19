@@ -11,10 +11,20 @@ import LoadingScreen from './LoadingScreen';
 import * as Permissions from "expo-permissions";
 import * as Location from "expo-location";
 
-const locations = require("./../../locations.json");
+const hoopLocations = require("./../../hoopLocations.json");
+const geolib = require('geolib');
+
 
 const MapScreen: React.FC = () => {
 
+  useEffect(() => {
+    _getUserLocation();
+    hoopLocations.forEach(hoop => {
+      let hoopCoords = hoop.coords;
+      hoopCoords.filter
+    });
+  })
+  
   // Styling for the map
   const MapStyle = [
     {
@@ -22,7 +32,7 @@ const MapScreen: React.FC = () => {
         "elementType": "labels.text.fill",
         "stylers": [
             {
-                "saturation": 36
+              "saturation": 36
             },
             {
                 "color": "#e5e5e5"
@@ -238,63 +248,45 @@ const MapScreen: React.FC = () => {
     }
   ];
 
-  const [location, setLocation] = useState(locations);
   const [latitude, setLatitude] = useState(59.866314);
   const [longitude, setLongitude] = useState(17.639217);
+  const [userLocation, setUserLocation] = useState();
   const [errorMessage, setErrorMessage] = useState("");
   const [sliderRadius, setSliderRadius] = useContext(UserContext);
 
-    const _getLocation = async () => {
-    try{
-    const { status } = await Permissions.getAsync(Permissions.LOCATION);
-
-    if (status !== "granted") {
-        //Prompt the user to give permission
-        const response = await Permissions.askAsync(Permissions.LOCATION);
-        setErrorMessage("PERMISSION NOT GRANTED");
-        console.log(errorMessage);
+    const _getUserLocation = async () => {
+      try{
+        const { status } = await Permissions.getAsync(Permissions.LOCATION);
+        if (status !== "granted") {
+          //Prompt the user to give permission
+          const response = await Permissions.askAsync(Permissions.LOCATION);
+          setErrorMessage("PERMISSION NOT GRANTED");
+          console.log(errorMessage);
+        }
+        const userLocation = await Location.getCurrentPositionAsync();
+        setLatitude(userLocation.coords.latitude);
+        setLongitude(userLocation.coords.longitude);
       }
-  
-  
-      const location = await Location.getCurrentPositionAsync();
-      setLatitude(location.coords.latitude);
-      setLongitude(location.coords.longitude);
-    }
-    catch {
-      let status = Location.getProviderStatusAsync();
-      if(!(await status).locationServicesEnabled){
-        alert("Enable Location Services To Use HoopFinder");
+      catch {
+        let status = Location.getProviderStatusAsync();
+        if(!(await status).locationServicesEnabled){
+          alert("Enable Location Services To Use HoopFinder");
+        }
       }
-    }
-
-
-
   }
-  
-  // //takes two arguments that are callbacks
-  // navigator.geolocation.getCurrentPosition(
-  //   ({ coords: {latitude, longitude} }) => {
-  //     setLatitude(latitude); 
-  //     setLongitude(longitude); 
-  //     () => console.log("State:", {latitude, longitude})
-  //   },
-  //   (error) => console.log("Error:", error)
-  // )
-  useEffect(() => {
-    _getLocation();
-    locations.forEach(hoop => {
-      // console.log(hoop)
-      const hoopCoords = hoop.coords
-      console.log(hoopCoords)
 
-    });
+  // this function uses geolib to calculate the distance between the points
+  const calculateDistance = (origLat, origLon, markerLat, markerLon)  =>{
+  return geolib.getDistance(
+  {latitude: origLat, longitude: origLon},
+  {latitude: markerLat, longitude: markerLon}
+  );
+  }
 
-  })
 
   const renderMarkers = () => {
-    locations.forEach(hoop => {
+    hoopLocations.forEach(hoop => {
       const hoopCoords = hoop.coords
-      console.log(hoop.address)
       return (
         <Marker 
           coordinate={{
@@ -307,7 +299,6 @@ const MapScreen: React.FC = () => {
       )
     });
   }
-
 
     if(latitude){
       return (
@@ -333,9 +324,11 @@ const MapScreen: React.FC = () => {
               strokeColor="white"
               />
               {
-                locations && locations.map((hoop, index) => {
+                hoopLocations.filter(marker => {
+                  let distance = calculateDistance(latitude, longitude, marker.coords.latitude, marker.coords.longitude);
+                  return distance <= sliderRadius;
+                }).map((hoop, index) => {
                   const hoopCoords = hoop.coords
-                  console.log(hoop.address)
                   return (
                     <Marker
                       key={index}
