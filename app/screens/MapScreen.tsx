@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import MapView, { Circle, Marker,  PROVIDER_GOOGLE } from "react-native-maps";
+import MapView, { Callout, CalloutSubview, Circle, Marker,  PROVIDER_GOOGLE } from "react-native-maps";
 import { StyleSheet, Text } from 'react-native';
 import { Colors } from '../styles';
 import { Content } from "native-base";
@@ -15,7 +15,7 @@ const hoopLocations = require("./../../hoopLocations.json");
 const geolib = require('geolib');
 
 
-const MapScreen: React.FC = () => {
+function MapScreen (props) {
 
   useEffect(() => {
     _getUserLocation();
@@ -253,6 +253,8 @@ const MapScreen: React.FC = () => {
   const [userLocation, setUserLocation] = useState();
   const [errorMessage, setErrorMessage] = useState("");
   const [sliderRadius, setSliderRadius] = useContext(UserContext);
+  const [choosenHoopLocation, setChoosenHoopLocation] = useContext(UserContext);
+
 
     const _getUserLocation = async () => {
       try{
@@ -300,6 +302,11 @@ const MapScreen: React.FC = () => {
     });
   }
 
+  const navigateToSelectedHoopLocation = (name) => {
+    setChoosenHoopLocation(name);
+    return props.navigation.navigate("HoopLocation");
+  }
+
     if(latitude){
       return (
       <Content contentContainerStyle={styles.container}>
@@ -330,18 +337,21 @@ const MapScreen: React.FC = () => {
                 }).map((hoop, index) => {
                   const hoopCoords = hoop.coords
                   return (
-                    <Marker
-                      key={index}
-                      coordinate={{
-                        latitude:hoopCoords.latitude ,
-                        longitude:hoopCoords.longitude
-                      }}
-                      title={hoop.name}
-                      description={hoop.address}
-                      icon={require("./../../assets/hoopMarker.png")}
-                      rotation={-10.8}
-                      style={styles.marker}
-                    />
+                      <Marker
+                        key={index}
+                        coordinate={{
+                          latitude:hoopCoords.latitude ,
+                          longitude:hoopCoords.longitude
+                        }}
+                        title={hoop.name}
+                        description={hoop.address}
+                        icon={require("./../../assets/hoopMarker.png")}
+                        rotation={-10.8}
+                        style={styles.marker}
+                        onPress={navigateToSelectedHoopLocation(hoop.name)}
+                      >
+                        {/* <CalloutSubview onPress={navigateToSelectedHoopLocation(hoop.name)}/> */}
+                      </Marker>
                   )
                 })
               }

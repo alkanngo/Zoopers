@@ -10,7 +10,9 @@ export const UserProvider = (props) => {
   const [isSignedIn, setIsSignedIn] = useState(false);
   const [name, setName] = useState("");
   const [photoUrl , setPhotoUrl] = useState(false);
+  const [choosenHoopLocation, setChoosenHoopLocation] = useState("");
   const [sliderRadius, setSliderRadius] = useState(850);
+
 
 
   return (
@@ -19,6 +21,7 @@ export const UserProvider = (props) => {
         [isSignedIn, setIsSignedIn],
         [name, setName],
         [photoUrl , setPhotoUrl],
+        [choosenHoopLocation, setChoosenHoopLocation],
         [sliderRadius, setSliderRadius]
       }>
       {props.children}

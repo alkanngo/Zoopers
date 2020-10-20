@@ -10,6 +10,8 @@ import HomeScreen from "./../screens/HomeScreen";
 import MapScreen from "./../screens/MapScreen";
 import LoginScreen from "../screens/LoginScreen";
 import LoadingScreen from "../screens/LoadingScreen";
+import HoopLocationScreen from "../screens/HoopLocationScreen";
+
 
 const screens = {
   Home: {
@@ -44,7 +46,16 @@ const screens = {
         backgroundColor: Colors.name.primary
       },
     }
-  }, 
+  },
+  HoopLocation: {
+    screen: HoopLocationScreen,
+    navigationOptions: {
+      headerTintColor: Colors.name.secondary,
+      headerStyle: {
+        backgroundColor: Colors.name.primary
+      },
+    }
+  }
 }
 
 const HomeStack = createStackNavigator(screens);
