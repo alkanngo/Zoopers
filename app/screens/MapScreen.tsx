@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import MapView, { Callout, CalloutSubview, Circle, Marker,  PROVIDER_GOOGLE } from "react-native-maps";
 import { StyleSheet, Text } from 'react-native';
 import { Colors } from '../styles';
-import { Content } from "native-base";
+import { Content, View } from "native-base";
 import { UserContext } from "./../context/UserContext";
 
 
@@ -13,16 +13,14 @@ import * as Location from "expo-location";
 
 const hoopLocations = require("./../../hoopLocations.json");
 const geolib = require('geolib');
+import HMarker from "../../assets/hoopMarker.svg";
 
 
-function MapScreen (props) {
+
+const MapScreen = ({navigation}) => {
 
   useEffect(() => {
     _getUserLocation();
-    hoopLocations.forEach(hoop => {
-      let hoopCoords = hoop.coords;
-      hoopCoords.filter
-    });
   })
   
   // Styling for the map
@@ -32,7 +30,7 @@ function MapScreen (props) {
         "elementType": "labels.text.fill",
         "stylers": [
             {
-              "saturation": 36
+                "saturation": 36
             },
             {
                 "color": "#e5e5e5"
@@ -173,7 +171,7 @@ function MapScreen (props) {
         "elementType": "geometry",
         "stylers": [
             {
-                "color": "#f16a21"
+                "color": "#d7d7d7"
             },
             {
                 "lightness": "0"
@@ -246,7 +244,7 @@ function MapScreen (props) {
             }
         ]
     }
-  ];
+];
 
   const [latitude, setLatitude] = useState(59.866314);
   const [longitude, setLongitude] = useState(17.639217);
@@ -304,7 +302,7 @@ function MapScreen (props) {
 
   const navigateToSelectedHoopLocation = (name) => {
     setChoosenHoopLocation(name);
-    return props.navigation.navigate("HoopLocation");
+    return navigation.push("HoopLocation");
   }
 
     if(latitude){
@@ -331,7 +329,7 @@ function MapScreen (props) {
               strokeColor="white"
               />
               {
-                hoopLocations.filter(marker => {
+                hoopLocations.locations.filter(marker => {
                   let distance = calculateDistance(latitude, longitude, marker.coords.latitude, marker.coords.longitude);
                   return distance <= sliderRadius;
                 }).map((hoop, index) => {
@@ -345,12 +343,13 @@ function MapScreen (props) {
                         }}
                         title={hoop.name}
                         description={hoop.address}
-                        icon={require("./../../assets/hoopMarker.png")}
-                        rotation={-10.8}
                         style={styles.marker}
-                        onPress={navigateToSelectedHoopLocation(hoop.name)}
+                        onCalloutPress={() => {
+                            setChoosenHoopLocation(hoop.name);
+                            navigation.push("HoopLocation")
+                        }}
                       >
-                        {/* <CalloutSubview onPress={navigateToSelectedHoopLocation(hoop.name)}/> */}
+                          <HMarker height={"100%"} width={"100%"}/>
                       </Marker>
                   )
                 })
@@ -382,8 +381,8 @@ const styles = StyleSheet.create({
     position: "absolute",
   },
   marker: {
-    height: 50,
-    width: 20,
+    height: 100,
+    width: 100,
   }
 });
 
