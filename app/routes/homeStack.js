@@ -1,9 +1,8 @@
 import React from "react";
-
-import { createStackNavigator, stack } from "react-navigation-stack";
+import { createStackNavigator } from "react-navigation-stack";
 import { createAppContainer } from "react-navigation";
 import { MiniLogo } from "./../components/Logo";
-import {Colors, Spacing, Typography} from '../styles';
+import {Colors, Typography} from '../styles';
 
 
 import HomeScreen from "./../screens/HomeScreen";
@@ -42,8 +41,11 @@ const screens = {
     screen: MapScreen,
     navigationOptions: {
       headerTintColor: Colors.name.secondary,
+      headerTitleStyle: {
+        fontFamily: Typography.font.primary,
+      },
       headerStyle: {
-        backgroundColor: Colors.name.primary
+        backgroundColor: Colors.name.primary,
       },
     }
   },
@@ -51,8 +53,11 @@ const screens = {
     screen: HoopLocationScreen,
     navigationOptions: {
       headerTintColor: Colors.name.secondary,
+      headerTitleStyle: {
+        fontFamily: Typography.font.primary,
+      },
       headerStyle: {
-        backgroundColor: Colors.name.primary
+        backgroundColor: Colors.name.primary,
       },
     }
   }
@@ -60,4 +65,6 @@ const screens = {
 
 const HomeStack = createStackNavigator(screens);
 
-export default createAppContainer(HomeStack);
+const RootApp = createAppContainer(HomeStack);
+
+export default RootApp;

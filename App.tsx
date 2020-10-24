@@ -1,17 +1,21 @@
+import React from 'react';
+import * as Font from "expo-font"
 import { Asset } from "expo-asset";
 import { AppLoading } from "expo"
-import LoginScreen from './app/screens/LoginScreen';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, StatusBar, StyleSheet } from 'react-native';
 import { UserProvider } from "./app/context/UserContext"
+// ToDo: implement this hook
 import { ProvideAuth } from "./app/hooks/useAuth";
-import Navigator from "./app/routes/homeStack";
+import RootApp from "./app/routes/homeStack";
+import { Container } from 'native-base';
+
 
 interface IAppProps{
 }
 
 interface IAppState {
   isReady:boolean;
+  fontsLoaded: boolean;
 }
 
 
@@ -25,6 +29,10 @@ function cacheImages(images) {
   });
 }
 
+function cacheFonts(fonts) {
+  return fonts.map(font => Font.loadAsync(font));
+}
+
 export default class App extends React.Component <IAppProps ,IAppState>{
   state: IAppState;
 
@@ -32,7 +40,8 @@ export default class App extends React.Component <IAppProps ,IAppState>{
     super(props)
     
     this.state={
-      isReady:false
+      isReady: false,
+      fontsLoaded: false,
     }
   }
 
@@ -40,31 +49,63 @@ export default class App extends React.Component <IAppProps ,IAppState>{
     const imageAssets = cacheImages([
       require('./assets/bBall.png'),
     ]);
-
-    //When using fonts pass this aswell with the spreadoperator in the Promise
-    // const fontAssets = cacheFonts([FontAwesome.font]);
-
     await Promise.all([...imageAssets,]);
+    await Font.loadAsync({
+      "sportsnights-ns": require("./assets/fonts/SFSportsNightNS.ttf"),  
+    });
+    this.setState({ fontsLoaded: true });
+  }
+
+  // // create a helper function to load the font 
+  // _loadFontsAsync = async () => {
+  //   return Font.loadAsync({
+  //     SFSportsNightsNS: require("./assets/fonts/SFSportsNightNS.ttf")
+  //   }).then(() => this.setState({ fontsLoaded: true }) )
+
+   // };
+
+  async componentDidMount() {
+    
+    await Font.loadAsync({
+      "SFSportsNightNS": require("./assets/fonts/SFSportsNightNS.ttf"),  
+    });
+    this.setState({ fontsLoaded: true });
+
   }
 
 
+
+
   render(){
+    const {fontsLoaded} = this.state
     if (!this.state.isReady) {
       return (
-        <AppLoading
-          startAsync={this._loadAssetsAsync}
-          onFinish={() => this.setState({ isReady: true })}
-          onError={console.warn}
-        />
+
+        <Container style={styles.container}>
+          <AppLoading
+            startAsync={this._loadAssetsAsync}
+            onFinish={() => this.setState({ isReady: true })}
+            onError={console.warn}
+          />
+          <ActivityIndicator />
+          <StatusBar barStyle="default" />
+        </Container>
       );
+    } else if (fontsLoaded){
+      return(
+        <UserProvider>
+          <RootApp />
+        </UserProvider>
+      )
     }
-    return(
-      <UserProvider>
-        <Navigator />
-      </UserProvider>
-    )
   }
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center'
+},
 });

@@ -22,13 +22,16 @@ const styles = StyleSheet.create({
     height: "100%",
     alignContent: "center",
     justifyContent: "center",
-    backgroundColor: Colors.name.background
+    backgroundColor: Colors.name.background,
   },
   locationName: {
     width: '100%',
     height: '100%',
+    fontFamily: Typography.font.primary,
+    paddingTop: 20,
+    fontSize: 20,
+    color: "#fff",
     textAlign: "center",
-
   },
 });
 

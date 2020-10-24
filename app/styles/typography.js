@@ -7,5 +7,6 @@ export const size = {
 }
 
 export const font = {
-  primary: 'Montserrat'
+  primary: "SFSportsNightNS",
+  secondary: "Montserrat"
 }

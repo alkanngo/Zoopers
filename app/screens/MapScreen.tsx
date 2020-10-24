@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useContext } from 'react';
-import MapView, { Callout, CalloutSubview, Circle, Marker,  PROVIDER_GOOGLE } from "react-native-maps";
+import MapView, { Circle, Marker,  PROVIDER_GOOGLE } from "react-native-maps";
 import { StyleSheet, Text } from 'react-native';
 import { Colors } from '../styles';
-import { Content, View } from "native-base";
+import { Content } from "native-base";
 import { UserContext } from "./../context/UserContext";
 
 

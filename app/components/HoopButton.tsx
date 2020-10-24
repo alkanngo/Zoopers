@@ -41,10 +41,13 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: Typography.size.md,
+    fontFamily: Typography.font.primary,
+
     color: Colors.name.secondary
   },
   dangerText: {
     fontSize: Typography.size.md,
+    fontFamily: Typography.font.primary,
     color: Colors.name.primary
   }
 });

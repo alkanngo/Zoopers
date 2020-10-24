@@ -11,7 +11,7 @@ const HoopSlider:React.FC = () => {
     <>
       <View style={styles.textGroup}>
         <Text style={styles.text}>Choose radius in which to find Hoops</Text>
-        <Text style={styles.km} >{Math.floor(sliderRadius)} m</Text>
+        <Text style={styles.meters} >{Math.floor(sliderRadius)} m</Text>
       </View>
       <View style={styles.slider}>
         <Slider 
@@ -25,7 +25,6 @@ const HoopSlider:React.FC = () => {
         />
       </View>
     </>
-        
   )
 }
 
@@ -37,10 +36,13 @@ const styles = StyleSheet.create({
   text: {
     fontSize: Typography.size.lg,
     textAlign: "center",
-    color: "#FFF"
+    color: "#FFF",
+    fontFamily: Typography.font.primary
   },
-  km: {
+  meters: {
     marginTop: Spacing.margin.lg,
+    fontFamily: Typography.font.primary,
+    fontSize: 40,
     color: "#FFF"
   },
   slider: {
