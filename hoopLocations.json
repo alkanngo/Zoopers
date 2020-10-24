@@ -1,4 +1,5 @@
-[
+{
+  "locations" : [
   {
     "name": "Fyrisskolan Basketplan",
     "address": "Götgatan 17, 752 22 Uppsala",
@@ -6,7 +7,8 @@
       "latitude": 59.86556,
       "longitude": 17.627279
     },
-    "image_url": "https://goo.gl/maps/VVrc1EoaqNWdMsEu5"
+    "image_url": "https://goo.gl/maps/VVrc1EoaqNWdMsEu5",
+    "rating": 3
   },
   {
     "name": "Solvallsparken",
@@ -15,7 +17,8 @@
       "latitude": 59.831023,
       "longitude": 17.631972
     },
-    "image_url": "https://goo.gl/maps/vebMyWrmobnhxKuu6"
+    "image_url": "https://goo.gl/maps/vebMyWrmobnhxKuu6",
+    "rating": 3
   },
   {
     "name": "Court von Kraemer",
@@ -24,6 +27,9 @@
       "latitude": 59.848891,
       "longitude": 17.635080
     },
-    "image_url": "https://goo.gl/maps/vebMyWrmobnhxKuu6"
+    "image_url": "https://goo.gl/maps/vebMyWrmobnhxKuu6",
+    "rating": 3
   }
 ]
+}
+
