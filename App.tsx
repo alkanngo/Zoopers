@@ -1,9 +1,9 @@
 import React from 'react';
-import * as Font from "expo-font"
+import * as Font from "expo-font";
 import { Asset } from "expo-asset";
-import { AppLoading } from "expo"
+import { AppLoading } from "expo";
 import { ActivityIndicator, StatusBar, StyleSheet } from 'react-native';
-import { UserProvider } from "./app/context/UserContext"
+import { GlobalStateProvider } from "./app/context/UserContext";
 // ToDo: implement this hook
 import { ProvideAuth } from "./app/hooks/useAuth";
 import RootApp from "./app/routes/homeStack";
@@ -53,7 +53,6 @@ export default class App extends React.Component <IAppProps ,IAppState>{
     await Font.loadAsync({
       "sportsnights-ns": require("./assets/fonts/SFSportsNightNS.ttf"),  
     });
-    this.setState({ fontsLoaded: true });
   }
 
   // // create a helper function to load the font 
@@ -90,12 +89,12 @@ export default class App extends React.Component <IAppProps ,IAppState>{
           <ActivityIndicator />
           <StatusBar barStyle="default" />
         </Container>
-      );
+      )
     } else if (fontsLoaded){
       return(
-        <UserProvider>
+        <GlobalStateProvider>
           <RootApp />
-        </UserProvider>
+        </GlobalStateProvider>
       )
     }
   }

@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
-import { Text, StyleSheet, View, Dimensions } from 'react-native';
-import { Content, Header, Form, Input, Item, Button, Label } from 'native-base';
+import { Text, StyleSheet, View } from 'react-native';
+import { Content, Form, Input, Item, Button, Label } from 'native-base';
 import { Colors, Spacing, Typography } from "../styles";
 import { UserContext } from "../context/UserContext";
 import {initFirebase} from "../config/firebaseConfig";
@@ -21,7 +21,6 @@ function LoginForm(props) {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [isLoggedIn, setIsLoggedIn] = useContext(UserContext)
   const [isSignedIn, setIsSignedIn] = useContext(UserContext);
   const [name, setName] = useContext(UserContext);
   const [photoUrl , setPhotoUrl] = useContext(UserContext);
@@ -155,7 +154,7 @@ function LoginForm(props) {
 
   const handleLogin = (email, password) => {
     loginUser(email, password);
-    setIsLoggedIn(true);
+    setIsSignedIn(true);
   }
 
 
